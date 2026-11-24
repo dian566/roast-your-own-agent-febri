@@ -7,11 +7,12 @@
 import os
 
 ROAST = "My agent wrote four confident paragraphs explaining the bug, then apologized: it had been reading the wrong file the whole time."
+MAX_LEN = 200  # bounty cap for a one-line roast
 
 
 def file_roast() -> None:
     """Write the roast to /output/entry.txt, nothing else."""
-    if len(ROAST) > 200 or not ROAST.strip() or "\n" in ROAST:
+    if len(ROAST) > MAX_LEN or not ROAST.strip() or "\n" in ROAST:
         raise ValueError("roast must be a single non-empty line of at most 200 characters")
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as handle:
